@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d16">
+  <meta name="description" content="ResQ intelligent campus safety command centre">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/resq-icon-192.png">
+  <title>ResQ — Campus Safety Command</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="icon" href="assets/resq-icon.svg?v=4" type="image/svg+xml">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <aside class="sidebar">
+    <a class="brand" href="#overview" aria-label="ResQ overview">
+      <span class="brand-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 40 11v12c0 11-7 17-16 21C15 40 8 34 8 23V11z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 24h8l4-8 4 16 4-10h8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="brand-copy"><strong>ResQ<span>.</span></strong><small>INTELLIGENT SAFETY</small></span>
+    </a>
+    <div class="nav-label">COMMAND</div>
+    <nav class="nav-list" aria-label="Dashboard navigation">
+      <a class="nav-item active" href="#overview"><span class="nav-icon">◫</span> Overview <i></i></a>
+      <a class="nav-item" href="#campus"><span class="nav-icon">⌖</span> Campus map</a>
+      <a class="nav-item" href="#rooms"><span class="nav-icon">⌘</span> Sensor network</a>
+      <a class="nav-item" href="#events"><span class="nav-icon">◷</span> Event timeline</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="node-card">
+        <div class="node-card-top"><span class="tiny-live"></span> CENTRAL CONTROLLER</div>
+        <div class="node-graphic"><span class="chip-icon">ESP</span><span class="node-lines"><i></i><i></i><i></i></span><span class="node-pulse"></span></div>
+        <strong id="sideDevice">CONNECTING</strong>
+        <small>RESQ-ESP32-001</small>
+        <div class="node-foot"><span>4 CHANNELS</span><span class="node-foot-dot"></span><span>WI-FI</span></div>
+      </div>
+      <div class="profile"><div class="avatar">M</div><div><strong>Musaib</strong><small>Project administrator</small></div><span class="profile-menu">•••</span></div>
+    </div>
+  </aside>
+
+  <main class="main" id="overview">
+    <header class="topbar">
+      <div class="mobile-brand"><span class="brand-mark small-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 40 11v12c0 11-7 17-16 21C15 40 8 34 8 23V11z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 24h8l4-8 4 16 4-10h8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span><b>ResQ<span>.</span></b></div>
+      <div class="breadcrumb">RESQ <span>/</span> COMMAND CENTER</div>
+      <div class="topbar-right"><span class="secure-label"><i class="tiny-live"></i> SENSOR NETWORK</span><span class="clock" id="clock">--:-- --</span><button id="soundBtn" class="sound-button" type="button" title="Enable browser alert sound">♫ <span>Enable sound</span></button></div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy"><div class="overline"><span class="overline-line"></span> CAMPUS SAFETY NETWORK <span class="version">SYSTEM 01</span></div><h1>See risk.<br><span>Respond faster.</span></h1><p>One view of your campus environment, sensor health and active incidents.</p></div>
+      <div class="hero-status"><div class="hero-status-top"><span class="status-ring"><i></i></span><div><small>SYSTEM CONNECTION</small><strong id="connection">INITIALIZING</strong></div></div><div class="hero-status-bottom"><span class="status-line"></span><span>ONE ESP32</span><span class="divider-dot">/</span><span>FOUR ZONES</span></div></div>
+    </section>
+
+    <section class="metric-grid" aria-label="System summary">
+      <article class="metric"><div class="metric-head"><span>MONITORED ZONES</span><span class="metric-icon cyan">⌖</span></div><div class="metric-value">04 <small>ROOMS</small></div><div class="metric-foot"><span class="metric-spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>4 configured channels</span></div></article>
+      <article class="metric"><div class="metric-head"><span>ACTIVE ALERTS</span><span class="metric-icon red">!</span></div><div class="metric-value" id="alertCount">00</div><div class="metric-foot"><span class="tiny-dot red-dot"></span><span id="alertSummary">No active alerts</span></div></article>
+      <article class="metric"><div class="metric-head"><span>CONTROLLER STATUS</span><span class="metric-icon green">⌁</span></div><div class="metric-value status-value" id="deviceState">WAITING</div><div class="metric-foot"><span class="tiny-dot green-dot"></span><span>Single ESP32 node</span></div></article>
+      <article class="metric"><div class="metric-head"><span>LAST SYNC</span><span class="metric-icon violet">◷</span></div><div class="metric-value status-value" id="lastSync">--:-- --</div><div class="metric-foot"><span class="tiny-dot cyan-dot"></span><span>Auto refresh enabled</span></div></article>
+    </section>
+
+    <section class="main-grid">
+      <article class="panel campus-panel" id="campus">
+        <div class="panel-heading"><div><div class="section-kicker">SPATIAL MONITORING <span>01—04</span></div><h2>Campus overview</h2></div><span class="live-tag"><i class="tiny-live"></i> LIVE VIEW</span></div>
+        <div class="map-legend"><span><i class="legend-dot online"></i> Normal</span><span><i class="legend-dot warning"></i> Alert</span><span><i class="legend-dot offline"></i> Offline</span></div>
+        <div class="campus-map">
+          <div class="map-grid"></div><div class="map-vignette"></div>
+          <svg class="map-connectors" viewBox="0 0 600 350" preserveAspectRatio="none" aria-hidden="true"><path class="connector-glow" d="M140 83 H300 V175 H460 M140 267 H300 V175 H460"/><path d="M140 83 H300 V175 H460 M140 267 H300 V175 H460"/><circle cx="300" cy="175" r="6"/><circle class="ring" cx="300" cy="175" r="16"/></svg>
+          <div class="map-room room-one" data-map-room="1"><span class="map-room-top"><b>01</b><i>FLAME</i></span><strong>Chemistry Lab</strong><small>Flame detection</small><span class="map-state" id="mapState1">○ NO DATA</span></div>
+          <div class="map-room room-two" data-map-room="2"><span class="map-room-top"><b>02</b><i>MQ-2</i></span><strong>Computer Lab</strong><small>Gas & smoke</small><span class="map-state" id="mapState2">○ NO DATA</span></div>
+          <div class="map-room room-three" data-map-room="3"><span class="map-room-top"><b>03</b><i>DHT11</i></span><strong>Classroom</strong><small>Temperature / humidity</small><span class="map-state" id="mapState3">○ NO DATA</span></div>
+          <div class="map-room room-four" data-map-room="4"><span class="map-room-top"><b>04</b><i>DHT11</i></span><strong>Library</strong><small>Temperature / humidity</small><span class="map-state" id="mapState4">○ NO DATA</span></div>
+          <div class="map-hub"><div class="hub-rings"><span>RQ</span></div><strong>RESQ CORE</strong><small>ESP32 HUB</small></div>
+          <div class="map-coordinate"><span>GRID / 001</span><span>4 SENSOR ZONES</span></div>
+        </div>
+        <div class="campus-footer"><span><i class="legend-dot online"></i> Four channels configured</span><span>CONTROLLER <b>ESP32</b></span></div>
+      </article>
+      <article class="panel events-panel" id="events">
+        <div class="panel-heading"><div><div class="section-kicker">INCIDENT MANAGEMENT</div><h2>Event timeline</h2></div><span class="event-count">LATEST 8</span></div>
+        <div class="event-list" id="alerts"><div class="empty-state"><span class="empty-mark">⌁</span><b>Waiting for event data</b><small>Events recorded by the ResQ backend appear here.</small></div></div>
+        <div class="panel-foot"><span class="foot-pulse"></span> Events from PHP / MySQL backend</div>
+      </article>
+    </section>
+
+    <section id="rooms" class="rooms-section">
+      <div class="section-title"><div><div class="section-kicker">TELEMETRY <span>/</span> CHANNELS 01—04</div><h2>Sensor network</h2><p>Room-level readings and sensor connection health.</p></div><div class="refresh-status"><span class="tiny-live"></span><span>POLLING EVERY 3 SEC</span></div></div>
+      <div id="roomsGrid" class="rooms-grid"><div class="room-placeholder"><span class="loading-ring"></span><span>Connecting to ResQ sensor network…</span></div></div>
+    </section>
+
+    <footer><div><strong>ResQ<span>.</span></strong><span class="footer-caption">INTELLIGENT CAMPUS SAFETY</span></div><div>DESIGNED & DEVELOPED BY <strong>MUSAIB</strong><span class="footer-separator">/</span> PROJECT BUILD 01</div></footer>
+  </main>
+  <nav class="mobile-nav" aria-label="Mobile navigation"><a class="active" href="#overview"><span>◫</span>Overview</a><a href="#campus"><span>⌖</span>Campus</a><a href="#rooms"><span>⌘</span>Rooms</a><a href="#events"><span>◷</span>Events</a></nav>
+  <script src="js/script.js?v=3"></script>
+  <script>if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")) { window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(err => console.warn("ResQ PWA service worker unavailable", err))); }</script>
+</body>
+</html>
